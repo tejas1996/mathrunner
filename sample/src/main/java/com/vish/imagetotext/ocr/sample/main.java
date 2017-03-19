@@ -310,7 +310,78 @@ public class main  extends Activity {
                                     fin="x="+x+" "+"y="+y;
                                     textView.setText(fin);
 
+                                    // Statements
+                                    break; // optional
 
+                                case 7 :
+
+                                    String z=matcher.group(4);
+                                    String zx="-";
+                                    if(matcher.group(4).length()==0){
+                                        a=1;
+                                    }
+                                    else if(z.equalsIgnoreCase(zx)){
+                                        a=-1;
+
+                                    }
+                                    else
+                                    {a=Integer.parseInt(matcher.group(4));}
+                                    a=-a;
+                                    if(matcher.group(1).length()==0){
+                                        b=1;
+                                    }
+                                    else b=Integer.parseInt(matcher.group(1));
+
+                                    c=Integer.parseInt(matcher.group(7));
+                                    c=-c;
+                                    b=-b;
+
+                                    an=new anss();
+
+                                    an=an.solquad(a,b,c);
+                                    x=an.aa;
+                                    y=an.bb;
+                                    fin="x="+x+" "+"y="+y;
+                                    textView.setText(fin);
+
+                                case 8 :
+
+                                    String z1=matcher.group(2);
+                                    String zx1="-";
+                                    if(matcher.group(2).length()==0){
+                                        a=1;
+                                    }
+                                    else if(z1.equalsIgnoreCase(zx1)){
+                                        a=-1;
+                                    }
+                                    else
+                                    {a=Integer.parseInt(matcher.group(2));}
+                                    a=-a;
+
+                                    z1=matcher.group(5);
+                                    zx1="+";
+                                    String zx2="-";
+                                    if(z1.equalsIgnoreCase(zx1)){
+                                        b=1;
+                                    }
+                                    else if(z1.equalsIgnoreCase(zx2)){
+                                        b=-1;
+                                    }
+
+                                    else b=Integer.parseInt(matcher.group(5));
+
+                                    b=-b;
+                                    c=Integer.parseInt(matcher.group(1));
+
+
+
+                                    an=new anss();
+
+                                    an=an.solquad(a,b,c);
+                                    x=an.aa;
+                                    y=an.bb;
+                                    fin="x="+x+" "+"y="+y;
+                                    textView.setText(fin);
 
 
 
@@ -318,6 +389,105 @@ public class main  extends Activity {
 
                                     // Statements
                                     break; // optional
+
+
+                                case 9:
+                                    // Statements
+                                    float o,aa3;
+
+                                    String z2=matcher.group(1);
+                                    String zx3="-";
+                                    if(matcher.group(1).length()==0){
+                                        aa3=1;
+                                    }
+                                    else if(z2.equalsIgnoreCase(zx3)){
+                                        aa3=-1;
+                                    }
+                                    else
+                                    {aa3=Integer.parseInt(matcher.group(1));}
+
+
+
+                                    float bb3=Integer.parseInt(matcher.group(5));
+
+                                    float cc3=Integer.parseInt(matcher.group(6));
+                                    String xc=String.valueOf(matcher.group(4));
+                                    String r="+";
+                                    String r1="-";
+                                    String r2="*";
+                                    String r4="/";
+                                    if(xc.equalsIgnoreCase(r))
+                                    {
+                                        o=(cc3-bb3)/aa3;
+                                        fin=o+" ";
+                                        textView.setText(fin);
+
+                                    }
+                                    else if(xc.equalsIgnoreCase(r1))
+                                    {
+                                        o=(cc3+bb3)/aa3;
+                                        fin=o+" ";
+                                        textView.setText(fin);
+
+                                    }
+                                    else if(xc.equalsIgnoreCase(r2))
+                                    {
+                                        o=(cc3/bb3)/aa3;
+                                        fin=o+" ";
+                                        textView.setText(fin);
+
+                                    }
+                                    else{
+                                        o=(cc3*bb3)/aa3;
+                                        fin=o+" ";
+                                        textView.setText(fin);
+
+                                    }
+
+
+
+
+                                    break; // optional
+
+
+                                case 10 :
+                                    // Statements
+                                    float aa2=Integer.parseInt(matcher.group(1));
+                                    float bb2=Integer.parseInt(matcher.group(3));
+                                    float ann2=aa2/bb2;
+                                    fin=ann2+" ";
+                                    textView.setText(fin);
+
+
+
+                                    break; // optional
+
+
+
+                                case 11 :
+                                    // Statements
+                                    float aa1=Integer.parseInt(matcher.group(1));
+                                    float bb1=Integer.parseInt(matcher.group(3));
+                                    float ann1=aa1*bb1;
+                                    fin=ann1+" ";
+                                    textView.setText(fin);
+
+
+
+                                    break; // optional
+
+
+                                case 12 :
+                                    float aa=Integer.parseInt(matcher.group(1));
+                                    float bb=Integer.parseInt(matcher.group(2));
+                                    float ann=aa+bb;
+                                    fin=ann+" ";
+                                    textView.setText(fin);
+
+
+                                    break;
+
+
 
 
 
@@ -351,16 +521,18 @@ public class main  extends Activity {
         final Pattern quadeq4 = Pattern.compile("([+-]?[\\d]+)?\\s*([a-zA-Z])2\\s*([+-][\\d]+)?\\s*=\\s*([+-]?[\\d]+)?\\s*");
         final Pattern quadeq5 = Pattern.compile("([+-]?([\\d]+)?)\\s*([a-zA-Z])2\\s*([+-][\\d]+)\\s*=\\s*([+-]?([\\d]+)?)\\s*([a-zA-Z])\\s*([+-]?[\\d]+)\\s*");
         final Pattern quadeq6 = Pattern.compile("([+-]?([\\d]+)?)?\\s*([a-zA-Z])2\\s*=\\s*([+-]?([\\d]+)?)?\\s*([a-zA-Z])\\s*([+-][\\d]+)?\\s*");
-        final Pattern quadeq7 = Pattern.compile("([+-]?[\\d]+)?\\s*([a-zA-Z])\\s*=\\s*([+-]?[\\d]+)?\\s*([a-zA-Z])2\\s*([+-]?[\\d]+)?\\s*");
-        final Pattern quadeq8 = Pattern.compile("([+-]?[\\d]+)?\\s*=\\s*([+-]?[\\d]+)?\\s*([a-zA-Z])2\\s*([+-]?[\\d]+)?\\s*([a-zA-Z])\\s*");
-        final Pattern quadeq9 = Pattern.compile("([+-]?[\\d]+)?\\s*([a-zA-Z])\\s*([+-]?[\\d]+)?\\s*=\\s*([+-]?[\\d]+)?\\s*([a-zA-Z])2\\s*");
-        final Pattern quadeq10 = Pattern.compile("([+-]?[\\d]+)?\\s*([a-zA-Z])\\s*([+-]?[\\d]+)?\\s*=\\s*([+-]?[\\d]+)?\\s*([a-zA-Z])2\\s*([+-]?[\\d]+)?\\s*");
-        final Pattern quadeq11 = Pattern.compile("([+-]?[\\d]+)?\\s*=\\s*([+-]?[\\d]+)?\\s*([a-zA-Z])2\\s*([+-]?[\\d]+)?\\s*([a-zA-Z])\\s*([+-]?[\\d]+)?\\s*");
+        final Pattern quadeq7 = Pattern.compile("([+-]?([\\d]+)?)?\\s*([a-zA-Z])\\s*=\\s*([+-]?([\\d]+)?)?\\s*([a-zA-Z])2\\s*([+-]?\\s*[\\d]+)?\\s*");
+        final Pattern quadeq8 = Pattern.compile("([+-]?[\\d]+)\\s*=\\s*([+-]?([\\d]+)?)\\s*([a-zA-Z])2\\s*([+-]?([\\d]+)?)\\s*([a-zA-Z])\\s*");
+        final Pattern quadeq9 = Pattern.compile("([+-]?([\\d]+)?)\\s*([a-zA-Z])\\s*([*]?[+-]?[/]?)(\\s*[\\d]+)\\s*=\\s*(\\d+)\\s*");
+        final Pattern quadeq10 = Pattern.compile("([+-]?[\\d]+)\\s*([/])\\s*([+-]?[\\d]+)\\s*");
+        final Pattern quadeq11 = Pattern.compile("([+-]?[\\d]+)\\s*([*])\\s*([+-]?[\\d]+)\\s*");
+        final Pattern quadeq12 = Pattern.compile("([+-]?[\\d]+)\\s*([+-][\\d]+)\\s*");
 
-        Pattern p[]= {quadeq1,quadeq2,quadeq3,quadeq4,quadeq5,quadeq6,quadeq7,quadeq8,quadeq9,quadeq10,quadeq11};
+
+        Pattern p[]= {quadeq1,quadeq2,quadeq3,quadeq4,quadeq5,quadeq6,quadeq7,quadeq8,quadeq9,quadeq10,quadeq11,quadeq12};
 
 
-        for(int i=0;i<11;i++){
+        for(int i=0;i<12;i++){
             matcher=p[i].matcher(str);
             if (matcher.matches()) {
                 return i+1;
