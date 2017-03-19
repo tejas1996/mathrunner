@@ -39,6 +39,8 @@ import com.example.croppersample.R;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by VisH on 19-06-2016.
@@ -48,8 +50,16 @@ public class main  extends Activity {
     private CropImageView mCropImageView;
     Bitmap converted;
     EditText textView;
+    float ansss;
+    int a,b,c;
+
+    double x,y;
+    anss an=new anss();
+
     private TessOCR mTessOCR;
+    public static Matcher matcher;
     private Uri mCropImageUri;
+    String fin;
     public static final String lang = "eng";
     public static final String DATA_PATH = Environment.getExternalStorageDirectory().toString() + "/DemoOCR/";
     private ProgressDialog mProgressDialog;
@@ -152,15 +162,173 @@ public class main  extends Activity {
                         // TODO Auto-generated method stub
                         if (result != null && !result.equals("")) {
                             String t = result;
-                            char a[]=new char[100];
-                            a=t.toCharArray();
-                            int len=a.length;
-                            char ch;
-                            ch=t.charAt(9);
-                            String newline= System.getProperty("line.seperator");
-                            boolean hasNewLine = t.contains(newline);
-                            String s=String.valueOf(hasNewLine);
-                            textView.setText(s);
+                            int type=testeqn(t);
+                            t=" "+type;
+                            switch(type) {
+                                case 1 :
+                                    an=new anss();
+                                    if(matcher.group(1).length()==0){
+                                        a=1;
+                                    }
+                                    else a=Integer.parseInt(matcher.group(1));
+                                    if(matcher.group(3).length()==0){
+                                        b=1;
+                                    }
+                                    else b=Integer.parseInt(matcher.group(4));
+                                    c=Integer.parseInt(matcher.group(7))-Integer.parseInt(matcher.group(8));
+                                    an=an.solquad(a,b,c);
+                                    x=an.aa;
+                                    y=an.bb;
+                                    fin="x="+x+" "+"y="+y;
+                                    textView.setText(fin);
+                                    break; // optional
+
+                                case 2 :
+                                    if(matcher.group(1).length()==0){
+                                        a=1;
+                                    }
+                                    else
+                                        a=Integer.parseInt(matcher.group(1));
+                                    if(matcher.group(4).length()==0){
+                                        b=1;
+                                    }
+                                    else b=Integer.parseInt(matcher.group(4));
+                                    c=Integer.parseInt(matcher.group(7));
+                                    c=-c;
+                                    an=new anss();
+
+                                    an=an.solquad(a,b,c);
+                                    x=an.aa;
+                                    y=an.bb;
+                                    fin="x="+x+" "+"y="+y;
+                                    textView.setText(fin);
+
+
+                                    // Statements
+                                    break; // optional
+
+                                case 3 :
+
+                                    if(matcher.group(1).length()==0){
+                                        a=1;
+                                    }
+                                    else  a=Integer.parseInt(matcher.group(1));
+
+                                    b=0;
+                                    c=Integer.parseInt(matcher.group(4));
+                                    c=-c;
+                                    an=new anss();
+
+                                    an=an.solquad(a,b,c);
+                                    x=an.aa;
+                                    y=an.bb;
+                                    fin="x="+x+" "+"y="+y;
+                                    textView.setText(fin);
+
+
+
+                                    // Statements
+                                    break; // optional
+
+                                case 4 :
+
+
+                                    if(matcher.group(1).length()==0){
+                                        a=1;
+                                    }
+                                    else  a=Integer.parseInt(matcher.group(1));
+
+                                    b=Integer.parseInt(matcher.group(3));
+                                    c=Integer.parseInt(matcher.group(4));
+                                    c=b-c;
+                                    b=0;
+                                    an=new anss();
+
+                                    an=an.solquad(a,b,c);
+                                    x=an.aa;
+                                    y=an.bb;
+                                    fin="x="+x+" "+"y="+y;
+                                    textView.setText(fin);
+
+
+
+
+
+                                    // Statements
+                                    break; // optional
+                                case 5 :
+
+                                if(matcher.group(1).length()==0){
+                                    a=1;
+                                }
+                                else
+                                    a=Integer.parseInt(matcher.group(1));
+                                if(matcher.group(5).length()==0){
+                                    b=1;
+                                }
+                                else b=Integer.parseInt(matcher.group(5));
+                                b=-b;
+                                c=Integer.parseInt(matcher.group(8));
+                                int d=Integer.parseInt(matcher.group(4));
+                                c=d-c;
+
+
+                                an=new anss();
+
+                                an=an.solquad(a,b,c);
+                                x=an.aa;
+                                y=an.bb;
+                                    fin="x="+x+" "+"y="+y;
+                                    textView.setText(fin);
+
+
+
+
+                                // Statements
+                                break; // optional
+                                case 6 :
+
+                                    if(matcher.group(1).length()==0){
+                                        a=1;
+                                    }
+                                    else
+                                        a=Integer.parseInt(matcher.group(1));
+                                    if(matcher.group(4).length()==0){
+                                        b=1;
+                                    }
+                                    else b=Integer.parseInt(matcher.group(4));
+                                    b=-b;
+                                    c=Integer.parseInt(matcher.group(7));
+                                    c=-c;
+
+
+                                    an=new anss();
+
+                                    an=an.solquad(a,b,c);
+                                    x=an.aa;
+                                    y=an.bb;
+                                    fin="x="+x+" "+"y="+y;
+                                    textView.setText(fin);
+
+
+
+
+
+
+
+                                    // Statements
+                                    break; // optional
+
+
+
+
+                                default : // Optional
+                                    // Statements
+                            }
+
+
+
+
 
 
                         }
@@ -175,6 +343,36 @@ public class main  extends Activity {
 
 
     }
+
+    public static int testeqn(String str) {
+        final Pattern quadeq1 = Pattern.compile("([+-]?([\\d]+)?)\\s*([a-zA-Z])2\\s*([+-]([\\d]+)?)\\s*([a-zA-Z])\\s*([+-][\\d]+)\\s*=\\s*([+-]?[\\d]+)\\s*");
+        final Pattern quadeq2 = Pattern.compile("([+-]?([\\d]+)?)\\s*([a-zA-Z])2\\s*([+-]([\\d+]+)?)\\s*([a-zA-Z])\\s*=\\s*([+-]?[\\d]+)\\s*");
+        final Pattern quadeq3 = Pattern.compile("([+-]?([\\d]+)?)\\s*([a-zA-Z])2\\s*=\\s*([+-]?[\\d]+)\\s*");
+        final Pattern quadeq4 = Pattern.compile("([+-]?[\\d]+)?\\s*([a-zA-Z])2\\s*([+-][\\d]+)?\\s*=\\s*([+-]?[\\d]+)?\\s*");
+        final Pattern quadeq5 = Pattern.compile("([+-]?([\\d]+)?)\\s*([a-zA-Z])2\\s*([+-][\\d]+)\\s*=\\s*([+-]?([\\d]+)?)\\s*([a-zA-Z])\\s*([+-]?[\\d]+)\\s*");
+        final Pattern quadeq6 = Pattern.compile("([+-]?([\\d]+)?)?\\s*([a-zA-Z])2\\s*=\\s*([+-]?([\\d]+)?)?\\s*([a-zA-Z])\\s*([+-][\\d]+)?\\s*");
+        final Pattern quadeq7 = Pattern.compile("([+-]?[\\d]+)?\\s*([a-zA-Z])\\s*=\\s*([+-]?[\\d]+)?\\s*([a-zA-Z])2\\s*([+-]?[\\d]+)?\\s*");
+        final Pattern quadeq8 = Pattern.compile("([+-]?[\\d]+)?\\s*=\\s*([+-]?[\\d]+)?\\s*([a-zA-Z])2\\s*([+-]?[\\d]+)?\\s*([a-zA-Z])\\s*");
+        final Pattern quadeq9 = Pattern.compile("([+-]?[\\d]+)?\\s*([a-zA-Z])\\s*([+-]?[\\d]+)?\\s*=\\s*([+-]?[\\d]+)?\\s*([a-zA-Z])2\\s*");
+        final Pattern quadeq10 = Pattern.compile("([+-]?[\\d]+)?\\s*([a-zA-Z])\\s*([+-]?[\\d]+)?\\s*=\\s*([+-]?[\\d]+)?\\s*([a-zA-Z])2\\s*([+-]?[\\d]+)?\\s*");
+        final Pattern quadeq11 = Pattern.compile("([+-]?[\\d]+)?\\s*=\\s*([+-]?[\\d]+)?\\s*([a-zA-Z])2\\s*([+-]?[\\d]+)?\\s*([a-zA-Z])\\s*([+-]?[\\d]+)?\\s*");
+
+        Pattern p[]= {quadeq1,quadeq2,quadeq3,quadeq4,quadeq5,quadeq6,quadeq7,quadeq8,quadeq9,quadeq10,quadeq11};
+
+
+        for(int i=0;i<11;i++){
+            matcher=p[i].matcher(str);
+            if (matcher.matches()) {
+                return i+1;
+            }
+        }
+
+
+
+
+        return 0;
+    }
+
     private Bitmap convertColorIntoBlackAndWhiteImage(Bitmap orginalBitmap) {
         ColorMatrix colorMatrix = new ColorMatrix();
         colorMatrix.setSaturation(0);
