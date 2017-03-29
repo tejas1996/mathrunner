@@ -49,7 +49,7 @@ public class main  extends Activity {
 
     private CropImageView mCropImageView;
     Bitmap converted;
-    EditText textView;
+    public static EditText textView;
     float ansss;
     int a,b,c;
 
@@ -59,6 +59,8 @@ public class main  extends Activity {
     private TessOCR mTessOCR;
     public static Matcher matcher;
     private Uri mCropImageUri;
+    public static Matcher matcher1 = null,matcher2=null;
+    public static int v1,v2,v3,v4,v5,v6;
     String fin;
     public static final String lang = "eng";
     public static final String DATA_PATH = Environment.getExternalStorageDirectory().toString() + "/DemoOCR/";
@@ -162,229 +164,211 @@ public class main  extends Activity {
                         // TODO Auto-generated method stub
                         if (result != null && !result.equals("")) {
                             String t = result;
-                            int type=testeqn(t);
-                            t=" "+type;
-                            switch(type) {
-                                case 1 :
-                                    an=new anss();
-                                    if(matcher.group(1).length()==0){
-                                        a=1;
-                                    }
-                                    else a=Integer.parseInt(matcher.group(1));
-                                    if(matcher.group(3).length()==0){
-                                        b=1;
-                                    }
-                                    else b=Integer.parseInt(matcher.group(4));
-                                    c=Integer.parseInt(matcher.group(7))-Integer.parseInt(matcher.group(8));
-                                    an=an.solquad(a,b,c);
-                                    x=an.aa;
-                                    y=an.bb;
-                                    fin="x="+x+" "+"y="+y;
+                            if (t.contains("|")) {
+                                int index = t.indexOf("|");
+                                String str1 = t.substring(0, index);
+                                String str2 = t.substring(index + 1, t.length());
+                                testeqn1(str1, str2);
+
+                            }
+                            else{
+                            int type = testeqn(t);
+                            t = " " + type;
+                            switch (type) {
+                                case 1:
+                                    an = new anss();
+                                    if (matcher.group(1).length() == 0) {
+                                        a = 1;
+                                    } else a = Integer.parseInt(matcher.group(1));
+                                    if (matcher.group(3).length() == 0) {
+                                        b = 1;
+                                    } else b = Integer.parseInt(matcher.group(4));
+                                    c = Integer.parseInt(matcher.group(7)) - Integer.parseInt(matcher.group(8));
+                                    an = an.solquad(a, b, c);
+                                    x = an.aa;
+                                    y = an.bb;
+                                    fin = "x=" + x + " " + "y=" + y;
                                     textView.setText(fin);
                                     break; // optional
 
-                                case 2 :
-                                    if(matcher.group(1).length()==0){
-                                        a=1;
-                                    }
-                                    else
-                                        a=Integer.parseInt(matcher.group(1));
-                                    if(matcher.group(4).length()==0){
-                                        b=1;
-                                    }
-                                    else b=Integer.parseInt(matcher.group(4));
-                                    c=Integer.parseInt(matcher.group(7));
-                                    c=-c;
-                                    an=new anss();
+                                case 2:
+                                    if (matcher.group(1).length() == 0) {
+                                        a = 1;
+                                    } else
+                                        a = Integer.parseInt(matcher.group(1));
+                                    if (matcher.group(4).length() == 0) {
+                                        b = 1;
+                                    } else b = Integer.parseInt(matcher.group(4));
+                                    c = Integer.parseInt(matcher.group(7));
+                                    c = -c;
+                                    an = new anss();
 
-                                    an=an.solquad(a,b,c);
-                                    x=an.aa;
-                                    y=an.bb;
-                                    fin="x="+x+" "+"y="+y;
+                                    an = an.solquad(a, b, c);
+                                    x = an.aa;
+                                    y = an.bb;
+                                    fin = "x=" + x + " " + "y=" + y;
                                     textView.setText(fin);
 
 
                                     // Statements
                                     break; // optional
 
-                                case 3 :
+                                case 3:
 
-                                    if(matcher.group(1).length()==0){
-                                        a=1;
-                                    }
-                                    else  a=Integer.parseInt(matcher.group(1));
+                                    if (matcher.group(1).length() == 0) {
+                                        a = 1;
+                                    } else a = Integer.parseInt(matcher.group(1));
 
-                                    b=0;
-                                    c=Integer.parseInt(matcher.group(4));
-                                    c=-c;
-                                    an=new anss();
+                                    b = 0;
+                                    c = Integer.parseInt(matcher.group(4));
+                                    c = -c;
+                                    an = new anss();
 
-                                    an=an.solquad(a,b,c);
-                                    x=an.aa;
-                                    y=an.bb;
-                                    fin="x="+x+" "+"y="+y;
+                                    an = an.solquad(a, b, c);
+                                    x = an.aa;
+                                    y = an.bb;
+                                    fin = "x=" + x + " " + "y=" + y;
                                     textView.setText(fin);
-
 
 
                                     // Statements
                                     break; // optional
 
-                                case 4 :
+                                case 4:
 
 
-                                    if(matcher.group(1).length()==0){
-                                        a=1;
-                                    }
-                                    else  a=Integer.parseInt(matcher.group(1));
+                                    if (matcher.group(1).length()==0) {
+                                        a = 1;
+                                    } else a = Integer.parseInt(matcher.group(1));
 
-                                    b=Integer.parseInt(matcher.group(3));
-                                    c=Integer.parseInt(matcher.group(4));
-                                    c=b-c;
-                                    b=0;
-                                    an=new anss();
+                                    b = Integer.parseInt(matcher.group(3));
+                                    c = Integer.parseInt(matcher.group(4));
+                                    c = b - c;
+                                    b = 0;
+                                    an = new anss();
 
-                                    an=an.solquad(a,b,c);
-                                    x=an.aa;
-                                    y=an.bb;
-                                    fin="x="+x+" "+"y="+y;
+                                    an = an.solquad(a, b, c);
+                                    x = an.aa;
+                                    y = an.bb;
+                                    fin = "x=" + x + " " + "y=" + y;
                                     textView.setText(fin);
-
-
-
 
 
                                     // Statements
                                     break; // optional
-                                case 5 :
+                                case 5:
 
-                                if(matcher.group(1).length()==0){
-                                    a=1;
-                                }
-                                else
-                                    a=Integer.parseInt(matcher.group(1));
-                                if(matcher.group(5).length()==0){
-                                    b=1;
-                                }
-                                else b=Integer.parseInt(matcher.group(5));
-                                b=-b;
-                                c=Integer.parseInt(matcher.group(8));
-                                int d=Integer.parseInt(matcher.group(4));
-                                c=d-c;
+                                    if (matcher.group(1).length() == 0) {
+                                        a = 1;
+                                    } else
+                                        a = Integer.parseInt(matcher.group(1));
+                                    if (matcher.group(5).length() == 0) {
+                                        b = 1;
+                                    } else b = Integer.parseInt(matcher.group(5));
+                                    b = -b;
+                                    c = Integer.parseInt(matcher.group(8));
+                                    int d = Integer.parseInt(matcher.group(4));
+                                    c = d - c;
 
 
-                                an=new anss();
+                                    an = new anss();
 
-                                an=an.solquad(a,b,c);
-                                x=an.aa;
-                                y=an.bb;
-                                    fin="x="+x+" "+"y="+y;
+                                    an = an.solquad(a, b, c);
+                                    x = an.aa;
+                                    y = an.bb;
+                                    fin = "x=" + x + " " + "y=" + y;
                                     textView.setText(fin);
 
 
+                                    // Statements
+                                    break; // optional
+                                case 6:
+
+                                    if (matcher.group(1).length() == 0) {
+                                        a = 1;
+                                    } else
+                                        a = Integer.parseInt(matcher.group(1));
+                                    if (matcher.group(4).length() == 0) {
+                                        b = 1;
+                                    } else b = Integer.parseInt(matcher.group(4));
+                                    b = -b;
+                                    c = Integer.parseInt(matcher.group(7));
+                                    c = -c;
 
 
-                                // Statements
-                                break; // optional
-                                case 6 :
+                                    an = new anss();
 
-                                    if(matcher.group(1).length()==0){
-                                        a=1;
-                                    }
-                                    else
-                                        a=Integer.parseInt(matcher.group(1));
-                                    if(matcher.group(4).length()==0){
-                                        b=1;
-                                    }
-                                    else b=Integer.parseInt(matcher.group(4));
-                                    b=-b;
-                                    c=Integer.parseInt(matcher.group(7));
-                                    c=-c;
-
-
-                                    an=new anss();
-
-                                    an=an.solquad(a,b,c);
-                                    x=an.aa;
-                                    y=an.bb;
-                                    fin="x="+x+" "+"y="+y;
+                                    an = an.solquad(a, b, c);
+                                    x = an.aa;
+                                    y = an.bb;
+                                    fin = "x=" + x + " " + "y=" + y;
                                     textView.setText(fin);
 
                                     // Statements
                                     break; // optional
 
-                                case 7 :
+                                case 7:
 
-                                    String z=matcher.group(4);
-                                    String zx="-";
-                                    if(matcher.group(4).length()==0){
-                                        a=1;
+                                    String z = matcher.group(4);
+                                    String zx = "-";
+                                    if (matcher.group(4).length() == 0) {
+                                        a = 1;
+                                    } else if (z.equalsIgnoreCase(zx)) {
+                                        a = -1;
+
+                                    } else {
+                                        a = Integer.parseInt(matcher.group(4));
                                     }
-                                    else if(z.equalsIgnoreCase(zx)){
-                                        a=-1;
+                                    a = -a;
+                                    if (matcher.group(1).length() == 0) {
+                                        b = 1;
+                                    } else b = Integer.parseInt(matcher.group(1));
 
-                                    }
-                                    else
-                                    {a=Integer.parseInt(matcher.group(4));}
-                                    a=-a;
-                                    if(matcher.group(1).length()==0){
-                                        b=1;
-                                    }
-                                    else b=Integer.parseInt(matcher.group(1));
+                                    c = Integer.parseInt(matcher.group(7));
+                                    c = -c;
+                                    b = -b;
 
-                                    c=Integer.parseInt(matcher.group(7));
-                                    c=-c;
-                                    b=-b;
+                                    an = new anss();
 
-                                    an=new anss();
-
-                                    an=an.solquad(a,b,c);
-                                    x=an.aa;
-                                    y=an.bb;
-                                    fin="x="+x+" "+"y="+y;
+                                    an = an.solquad(a, b, c);
+                                    x = an.aa;
+                                    y = an.bb;
+                                    fin = "x=" + x + " " + "y=" + y;
                                     textView.setText(fin);
 
-                                case 8 :
+                                case 8:
 
-                                    String z1=matcher.group(2);
-                                    String zx1="-";
-                                    if(matcher.group(2).length()==0){
-                                        a=1;
+                                    String z1 = matcher.group(2);
+                                    String zx1 = "-";
+                                    if (matcher.group(2).length() == 0) {
+                                        a = 1;
+                                    } else if (z1.equalsIgnoreCase(zx1)) {
+                                        a = -1;
+                                    } else {
+                                        a = Integer.parseInt(matcher.group(2));
                                     }
-                                    else if(z1.equalsIgnoreCase(zx1)){
-                                        a=-1;
-                                    }
-                                    else
-                                    {a=Integer.parseInt(matcher.group(2));}
-                                    a=-a;
+                                    a = -a;
 
-                                    z1=matcher.group(5);
-                                    zx1="+";
-                                    String zx2="-";
-                                    if(z1.equalsIgnoreCase(zx1)){
-                                        b=1;
-                                    }
-                                    else if(z1.equalsIgnoreCase(zx2)){
-                                        b=-1;
-                                    }
+                                    z1 = matcher.group(5);
+                                    zx1 = "+";
+                                    String zx2 = "-";
+                                    if (z1.equalsIgnoreCase(zx1)) {
+                                        b = 1;
+                                    } else if (z1.equalsIgnoreCase(zx2)) {
+                                        b = -1;
+                                    } else b = Integer.parseInt(matcher.group(5));
 
-                                    else b=Integer.parseInt(matcher.group(5));
-
-                                    b=-b;
-                                    c=Integer.parseInt(matcher.group(1));
+                                    b = -b;
+                                    c = Integer.parseInt(matcher.group(1));
 
 
+                                    an = new anss();
 
-                                    an=new anss();
-
-                                    an=an.solquad(a,b,c);
-                                    x=an.aa;
-                                    y=an.bb;
-                                    fin="x="+x+" "+"y="+y;
+                                    an = an.solquad(a, b, c);
+                                    x = an.aa;
+                                    y = an.bb;
+                                    fin = "x=" + x + " " + "y=" + y;
                                     textView.setText(fin);
-
-
-
 
 
                                     // Statements
@@ -393,114 +377,95 @@ public class main  extends Activity {
 
                                 case 9:
                                     // Statements
-                                    float o,aa3;
+                                    float o, aa3;
 
-                                    String z2=matcher.group(1);
-                                    String zx3="-";
-                                    if(matcher.group(1).length()==0){
-                                        aa3=1;
+                                    String z2 = matcher.group(1);
+                                    String zx3 = "-";
+                                    if (matcher.group(1).length() == 0) {
+                                        aa3 = 1;
+                                    } else if (z2.equalsIgnoreCase(zx3)) {
+                                        aa3 = -1;
+                                    } else {
+                                        aa3 = Integer.parseInt(matcher.group(1));
                                     }
-                                    else if(z2.equalsIgnoreCase(zx3)){
-                                        aa3=-1;
-                                    }
-                                    else
-                                    {aa3=Integer.parseInt(matcher.group(1));}
 
 
+                                    float bb3 = Integer.parseInt(matcher.group(5));
 
-                                    float bb3=Integer.parseInt(matcher.group(5));
+                                    float cc3 = Integer.parseInt(matcher.group(6));
+                                    String xc = String.valueOf(matcher.group(4));
+                                    String r = "+";
+                                    String r1 = "-";
+                                    String r2 = "*";
+                                    String r4 = "/";
+                                    if (xc.equalsIgnoreCase(r)) {
+                                        o = (cc3 - bb3) / aa3;
+                                        fin = o + " ";
+                                        textView.setText(fin);
 
-                                    float cc3=Integer.parseInt(matcher.group(6));
-                                    String xc=String.valueOf(matcher.group(4));
-                                    String r="+";
-                                    String r1="-";
-                                    String r2="*";
-                                    String r4="/";
-                                    if(xc.equalsIgnoreCase(r))
-                                    {
-                                        o=(cc3-bb3)/aa3;
-                                        fin=o+" ";
+                                    } else if (xc.equalsIgnoreCase(r1)) {
+                                        o = (cc3 + bb3) / aa3;
+                                        fin = o + " ";
+                                        textView.setText(fin);
+
+                                    } else if (xc.equalsIgnoreCase(r2)) {
+                                        o = (cc3 / bb3) / aa3;
+                                        fin = o + " ";
+                                        textView.setText(fin);
+
+                                    } else {
+                                        o = (cc3 * bb3) / aa3;
+                                        fin = o + " ";
                                         textView.setText(fin);
 
                                     }
-                                    else if(xc.equalsIgnoreCase(r1))
-                                    {
-                                        o=(cc3+bb3)/aa3;
-                                        fin=o+" ";
-                                        textView.setText(fin);
-
-                                    }
-                                    else if(xc.equalsIgnoreCase(r2))
-                                    {
-                                        o=(cc3/bb3)/aa3;
-                                        fin=o+" ";
-                                        textView.setText(fin);
-
-                                    }
-                                    else{
-                                        o=(cc3*bb3)/aa3;
-                                        fin=o+" ";
-                                        textView.setText(fin);
-
-                                    }
-
-
 
 
                                     break; // optional
 
 
-                                case 10 :
+                                case 10:
                                     // Statements
-                                    float aa2=Integer.parseInt(matcher.group(1));
-                                    float bb2=Integer.parseInt(matcher.group(3));
-                                    float ann2=aa2/bb2;
-                                    fin=ann2+" ";
+                                    float aa2 = Integer.parseInt(matcher.group(1));
+                                    float bb2 = Integer.parseInt(matcher.group(3));
+                                    float ann2 = aa2 / bb2;
+                                    fin = ann2 + " ";
                                     textView.setText(fin);
 
 
-
                                     break; // optional
 
 
-
-                                case 11 :
+                                case 11:
                                     // Statements
-                                    float aa1=Integer.parseInt(matcher.group(1));
-                                    float bb1=Integer.parseInt(matcher.group(3));
-                                    float ann1=aa1*bb1;
-                                    fin=ann1+" ";
+                                    float aa1 = Integer.parseInt(matcher.group(1));
+                                    float bb1 = Integer.parseInt(matcher.group(3));
+                                    float ann1 = aa1 * bb1;
+                                    fin = ann1 + " ";
                                     textView.setText(fin);
 
 
-
                                     break; // optional
 
 
-                                case 12 :
-                                    float aa=Integer.parseInt(matcher.group(1));
-                                    float bb=Integer.parseInt(matcher.group(2));
-                                    float ann=aa+bb;
-                                    fin=ann+" ";
+                                case 12:
+                                    float aa = Integer.parseInt(matcher.group(1));
+                                    float bb = Integer.parseInt(matcher.group(2));
+                                    float ann = aa + bb;
+                                    fin = ann + " ";
                                     textView.setText(fin);
 
 
                                     break;
 
 
-
-
-
-
-                                default : // Optional
+                                default: // Optional
                                     // Statements
+                                    textView.setText("We are not ready for this..Sorry!!");
                             }
 
 
-
-
-
-
+                        }
                         }
 
                         mProgressDialog.dismiss();
@@ -529,6 +494,7 @@ public class main  extends Activity {
         final Pattern quadeq12 = Pattern.compile("([+-]?[\\d]+)\\s*([+-][\\d]+)\\s*");
 
 
+
         Pattern p[]= {quadeq1,quadeq2,quadeq3,quadeq4,quadeq5,quadeq6,quadeq7,quadeq8,quadeq9,quadeq10,quadeq11,quadeq12};
 
 
@@ -543,6 +509,159 @@ public class main  extends Activity {
 
 
         return 0;
+    }
+
+    public static void testeqn1(String str1,String str2) {
+        int test1 = 0,test2 = 0;
+        final Pattern lineq1 = Pattern.compile("\\s*([+-]?[\\d]+)\\s*([a-zA-Z])\\s*=\\s*(\\d+)\\s*");
+        final Pattern lineq2 = Pattern.compile("\\s*([+-]?[\\d]+)\\s*([a-zA-Z])\\s*([+-]\\s*[\\d]+)\\s*=\\s*(\\d+)\\s*");
+        final Pattern lineq3 = Pattern.compile("\\s*([+-]?[\\d]+)\\s*([a-zA-Z])\\s*([+-]\\s*[\\d]+)\\s*([a-zA-Z])\\s*=\\s*([\\d]+)\\s*");
+        final Pattern lineq4 = Pattern.compile("\\s*([+-]?[\\d]+)\\s*([a-zA-Z])\\s*=([+-]?[\\d]+)\\s*([a-zA-Z])\\s*([+-][\\d]+)\\s*");
+        final Pattern lineq5 = Pattern.compile("\\s*([+-]?[\\d]+)\\s*([a-zA-Z])\\s*=\\s*([+-]?[\\d]+)([+-]?[\\d]+)\\s*([a-zA-Z])\\s*");
+        final Pattern lineq6 = Pattern.compile("\\s*([+-]?[\\d]+)\\s*([a-zA-Z])\\s*=([+-]?[\\d]+)\\s*([a-zA-Z])\\s*([+-][\\d]+)\\s*");
+        final Pattern lineq7 = Pattern.compile("\\s*([+-]?[\\d]+)\\s*([a-zA-Z])\\s*=\\s*([+-]?[\\d]+)([+-]?[\\d]+)\\s*([a-zA-Z])\\s*");
+
+        Pattern p[]= {lineq1,lineq2,lineq3,lineq4,lineq5,lineq6,lineq7};
+
+
+        for(int i=0;i<5;i++){
+            matcher1=p[i].matcher(str1);
+            if (matcher1.matches()) {
+                test1=i+1;
+                break;
+            }
+        }
+        for(int i=0;i<5;i++){
+            matcher2=p[i].matcher(str2);
+            if (matcher2.matches()) {
+                test2=i+1;
+                break;
+            }
+        }
+        System.out.println(test1+" "+test2);
+        System.out.println(str1+" "+str2);
+        switch(test1){
+            case 1:
+                if("x".equals(matcher1.group(2))){
+                    v1=Integer.parseInt(matcher1.group(1));
+                    v2=0;
+                } else {
+                    v1=0;
+                    v2=Integer.parseInt(matcher1.group(1));
+                }
+                v3=Integer.parseInt(matcher1.group(3));
+                break;
+            case 2:
+                if("x".equals(matcher1.group(2))){
+                    v1=Integer.parseInt(matcher1.group(1));
+                    v2=0;
+                } else {
+                    v1=0;
+                    v2=Integer.parseInt(matcher1.group(1));
+                }
+                v3=Integer.parseInt(matcher1.group(4))-Integer.parseInt(matcher1.group(3));
+                break;
+            case 3:
+                if("x".equals(matcher1.group(2))){
+                    v1=Integer.parseInt(matcher1.group(1));
+                    v2=Integer.parseInt(matcher1.group(3));
+                } else {
+                    v1=Integer.parseInt(matcher1.group(3));
+                    v2=Integer.parseInt(matcher1.group(1));
+                }
+                v3=Integer.parseInt(matcher1.group(5));
+                break;
+            case 4:
+                if("x".equals(matcher1.group(2))){
+                    v1=Integer.parseInt(matcher1.group(1));
+                    v2=-1*Integer.parseInt(matcher1.group(3));
+                } else {
+                    v1=-1*Integer.parseInt(matcher1.group(3));
+                    v2=Integer.parseInt(matcher1.group(1));
+                }
+                v3=Integer.parseInt(matcher1.group(5));
+                break;
+            case 5:
+                if("x".equals(matcher1.group(2))){
+                    v1=Integer.parseInt(matcher1.group(1));
+                    v2=-1*Integer.parseInt(matcher1.group(5));
+                } else {
+                    v1=-1*Integer.parseInt(matcher1.group(5));
+                    v2=Integer.parseInt(matcher1.group(1));
+                }
+                v3=Integer.parseInt(matcher1.group(3));
+                break;
+
+
+        }
+        switch(test2){
+            case 1:
+                if("x".equals(matcher2.group(2))){
+                    v4=Integer.parseInt(matcher2.group(1));
+                    v5=0;
+                } else {
+                    v4=0;
+                    v5=Integer.parseInt(matcher2.group(1));
+                }
+                v6=Integer.parseInt(matcher2.group(3));
+                break;
+            case 2:
+                if("x".equals(matcher2.group(2))){
+                    v4=Integer.parseInt(matcher2.group(1));
+                    v5=0;
+                } else {
+                    v4=0;
+                    v5=Integer.parseInt(matcher2.group(1));
+                }
+                v6=Integer.parseInt(matcher2.group(4))-Integer.parseInt(matcher2.group(3));
+                break;
+            case 3:
+                if("x".equals(matcher2.group(2))){
+                    v4=Integer.parseInt(matcher2.group(1));
+                    v5=Integer.parseInt(matcher2.group(3));
+                } else {
+                    v4=Integer.parseInt(matcher2.group(3));
+                    v5=Integer.parseInt(matcher2.group(1));
+                }
+                v6=Integer.parseInt(matcher2.group(5));
+                break;
+            case 4:
+                if("x".equals(matcher2.group(2))){
+                    v4=Integer.parseInt(matcher2.group(1));
+                    v5=Integer.parseInt(matcher2.group(3));
+                } else {
+                    v4=Integer.parseInt(matcher2.group(3));
+                    v5=Integer.parseInt(matcher2.group(1));
+                }
+                v6=Integer.parseInt(matcher2.group(5));
+                break;
+            case 5:
+                if("x".equals(matcher2.group(2))){
+                    v4=Integer.parseInt(matcher2.group(1));
+                    v5=-1*Integer.parseInt(matcher2.group(4));
+                } else {
+                    v4=-1*Integer.parseInt(matcher2.group(4));
+                    v5=Integer.parseInt(matcher2.group(1));
+                }
+                v6=Integer.parseInt(matcher2.group(3));
+                break;
+
+
+        }
+        solvelin(v1,v2,v3,v4,v5,v6);
+    }
+
+    public static void solvelin(int a, int b, int c, int d, int e, int f) {
+        if((a*e)-(b*d) != 0){
+            double x = ((c*e)-(b*f))/((a*e)-(b*d));
+            double y = ((a*f)-(c*d))/((a*e)-(b*d));
+            String v7="x = "+x + "\ny = "+y;
+            textView.setText(v7);
+        }
+        else
+        {
+            textView.setText("Equation has no solutions");
+        }
     }
 
     private Bitmap convertColorIntoBlackAndWhiteImage(Bitmap orginalBitmap) {
