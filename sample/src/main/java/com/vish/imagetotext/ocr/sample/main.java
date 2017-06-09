@@ -23,6 +23,7 @@ import android.provider.MediaStore;
 
 import android.provider.Settings;
 import android.system.ErrnoException;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -41,6 +42,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.math.*;
 
 /**
  * Created by VisH on 19-06-2016.
@@ -50,6 +52,8 @@ public class main  extends Activity {
     private CropImageView mCropImageView;
     Bitmap converted;
     public static EditText textView;
+    public static EditText textV2;
+    public String st;
     float ansss;
     int a,b,c;
 
@@ -71,6 +75,7 @@ public class main  extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_main);
         textView = (EditText)findViewById(R.id.editText);
+        textV2 = (EditText)findViewById(R.id.editText1);
 
         mCropImageView = (CropImageView) findViewById(R.id.CropImageView);
         String[] paths = new String[] { DATA_PATH, DATA_PATH + "tessdata/" };
@@ -139,6 +144,62 @@ public class main  extends Activity {
 
     }
 
+    public void onCropImageClick1(View view) {
+        Bitmap cropped = mCropImageView.getCroppedImage(500, 500);
+        if (cropped != null)
+
+        //mImage.setImageBitmap(converted);
+        doOCR1(convertColorIntoBlackAndWhiteImage(cropped) );
+
+    }
+
+    public void doOCR1(final Bitmap bitmap) {
+        if (mProgressDialog == null) {
+            mProgressDialog = ProgressDialog.show(this, "Processing",
+                    "Please wait...", true);
+            // mResult.setVisibility(V.ViewISIBLE);
+
+
+        } else {
+            mProgressDialog.show();
+        }
+
+        new Thread(new Runnable() {
+            public void run() {
+
+                final String result = mTessOCR.getOCRResult(bitmap).toLowerCase();
+
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        // TODO Auto-generated method stub
+                        if (result != null && !result.equals("")) {
+                            String s = result;
+
+
+                            textV2.setText(s);
+
+
+
+
+                        }
+
+                        mProgressDialog.dismiss();
+                    }
+
+                });
+
+            }
+
+            ;
+        }).start();
+
+
+    }
+
+
     public void doOCR(final Bitmap bitmap) {
         if (mProgressDialog == null) {
             mProgressDialog = ProgressDialog.show(this, "Processing",
@@ -164,6 +225,8 @@ public class main  extends Activity {
                         // TODO Auto-generated method stub
                         if (result != null && !result.equals("")) {
                             String t = result;
+                            Editable j=textV2.getText();
+                            t=j.toString();
                             if (t.contains("|")) {
                                 int index = t.indexOf("|");
                                 String str1 = t.substring(0, index);
@@ -458,6 +521,175 @@ public class main  extends Activity {
 
                                     break;
 
+                                case 13 :
+                                    double angle=Integer.parseInt(matcher.group(2));
+
+                                    double rad=Math.toRadians(angle);
+                                    double ann5=Math.sin(rad);
+                                    fin = ann5 + " ";
+                                    textView.setText(fin);
+
+
+                                    break;
+
+                                case 14 :
+                                    double angle1=Integer.parseInt(matcher.group(2));
+
+                                    double rad1=Math.toRadians(angle1);
+                                    double ann51=Math.cos(rad1);
+                                    fin = ann51 + " ";
+                                    textView.setText(fin);
+
+
+                                    break;
+
+                                case 15 :
+                                    double angle2=Integer.parseInt(matcher.group(2));
+
+                                    double rad2=Math.toRadians(angle2);
+                                    double ann52=Math.tan(rad2);
+                                    fin = ann52 + " ";
+                                    textView.setText(fin);
+
+
+                                    break;
+
+                                case 16 :
+                                    double angle3=Integer.parseInt(matcher.group(2));
+
+                                    double rad3=Math.toRadians(angle3);
+                                    double ann53=Math.sin(rad3);
+                                    ann53=1.0/ann53;
+                                    fin = ann53 + " ";
+                                    textView.setText(fin);
+
+
+                                    break;
+
+                                case 17 :
+                                    double angle4=Integer.parseInt(matcher.group(2));
+
+                                    double rad4=Math.toRadians(angle4);
+                                    double ann54=Math.cos(rad4);
+                                    ann54=1.0/ann54;
+                                    fin = ann54 + " ";
+                                    textView.setText(fin);
+
+
+                                    break;
+
+                                case 18 :
+                                    double angle5=Integer.parseInt(matcher.group(2));
+
+                                    double rad5=Math.toRadians(angle5);
+                                    double ann55=Math.sin(rad5);
+                                    ann55=1.0/ann55;
+                                    fin = ann55 + " ";
+                                    textView.setText(fin);
+
+
+                                    break;
+
+                                case 19 :
+                                    double ang=Integer.parseInt(matcher.group(1));
+                                    double ang1=Integer.parseInt(matcher.group(2));
+
+
+                                    double ant=ang+ang1;
+                                    fin = ant + " ";
+
+                                    textView.setText(fin);
+
+
+                                    break;
+
+                                case 20 :
+                                    double ang12=Integer.parseInt(matcher.group(1));
+                                    double ang11=Integer.parseInt(matcher.group(2));
+                                    double ang131=Integer.parseInt(matcher.group(3));
+
+
+
+                                    double ant1=ang12+ang11+ang131;
+                                    fin = ant1 + " ";
+
+                                    textView.setText(fin);
+
+
+                                    break;
+                                case 21 :
+                                    double ang121=Integer.parseInt(matcher.group(1));
+                                    double ang111=Integer.parseInt(matcher.group(2));
+                                    double ang1311=Integer.parseInt(matcher.group(3));
+                                    double ang1341=Integer.parseInt(matcher.group(4));
+
+
+                                    double ant12=ang121+ang111+ang1311+ang1341;
+                                    fin = ant12 + " ";
+
+                                    textView.setText(fin);
+
+
+                                    break;
+
+                                case 22 :
+                                    double ang122=Integer.parseInt(matcher.group(1));
+                                    double ang112=Integer.parseInt(matcher.group(2));
+                                    double ang1312=Integer.parseInt(matcher.group(3));
+                                    double ang1342=Integer.parseInt(matcher.group(4));
+                                    double ang13422=Integer.parseInt(matcher.group(5));
+
+                                    double ant122=ang122+ang112+ang1312+ang1342+ang13422;
+                                    fin = ant122 + " ";
+
+                                    textView.setText(fin);
+
+
+                                    break;
+                                case 23 :
+                                    double ang123=Integer.parseInt(matcher.group(1));
+                                    double ang113=Integer.parseInt(matcher.group(2));
+                                    double ang1313=Integer.parseInt(matcher.group(3));
+                                    double ang1343=Integer.parseInt(matcher.group(4));
+                                    double ang13423=Integer.parseInt(matcher.group(5));
+                                    double ang134233=Integer.parseInt(matcher.group(6));
+
+                                    double ant123=ang123+ang113+ang1313+ang1343+ang13423+ang134233;
+                                    fin = ant123 + " ";
+
+                                    textView.setText(fin);
+
+
+                                    break;
+
+                                case 24 :
+                                    double ang124=Integer.parseInt(matcher.group(1));
+                                    double ang114=Integer.parseInt(matcher.group(2));
+                                    double ang1314=Integer.parseInt(matcher.group(3));
+                                    double ang1344=Integer.parseInt(matcher.group(4));
+                                    double ang13424=Integer.parseInt(matcher.group(5));
+                                    double ang134234=Integer.parseInt(matcher.group(6));
+                                    double ang134235=Integer.parseInt(matcher.group(7));
+                                    double ant124=ang124+ang114+ang1314+ang1344+ang13424+ang134234+ang134235;
+                                    fin = ant124 + " ";
+
+                                    textView.setText(fin);
+
+
+                                    break;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                 default: // Optional
                                     // Statements
@@ -488,17 +720,33 @@ public class main  extends Activity {
         final Pattern quadeq6 = Pattern.compile("([+-]?([\\d]+)?)?\\s*([a-zA-Z])2\\s*=\\s*([+-]?([\\d]+)?)?\\s*([a-zA-Z])\\s*([+-][\\d]+)?\\s*");
         final Pattern quadeq7 = Pattern.compile("([+-]?([\\d]+)?)?\\s*([a-zA-Z])\\s*=\\s*([+-]?([\\d]+)?)?\\s*([a-zA-Z])2\\s*([+-]?\\s*[\\d]+)?\\s*");
         final Pattern quadeq8 = Pattern.compile("([+-]?[\\d]+)\\s*=\\s*([+-]?([\\d]+)?)\\s*([a-zA-Z])2\\s*([+-]?([\\d]+)?)\\s*([a-zA-Z])\\s*");
-        final Pattern quadeq9 = Pattern.compile("([+-]?([\\d]+)?)\\s*([a-zA-Z])\\s*([*]?[+-]?[/]?)(\\s*[\\d]+)\\s*=\\s*(\\d+)\\s*");
+        final Pattern quadeq9 = Pattern.compile("([+-]?([\\d]+)?)\\s*([a-zA-Z])\\s*([*]?[+-]?[/]?)\\s*([\\d]+)\\s*=\\s*(\\d+)\\s*");
         final Pattern quadeq10 = Pattern.compile("([+-]?[\\d]+)\\s*([/])\\s*([+-]?[\\d]+)\\s*");
         final Pattern quadeq11 = Pattern.compile("([+-]?[\\d]+)\\s*([*])\\s*([+-]?[\\d]+)\\s*");
         final Pattern quadeq12 = Pattern.compile("([+-]?[\\d]+)\\s*([+-][\\d]+)\\s*");
+        final Pattern quadeq13 = Pattern.compile("(sin)\\s*([+-]?[\\d]+)\\s*");
+        final Pattern quadeq14 = Pattern.compile("(cos)\\s*([+-]?[\\d]+)\\s*");
+        final Pattern quadeq15 = Pattern.compile("(tan)\\s*([+-]?[\\d]+)\\s*");
+        final Pattern quadeq16 = Pattern.compile("(cosec)\\s*([+-]?[\\d]+)\\s*");
+        final Pattern quadeq17 = Pattern.compile("(sec)\\s*([+-]?[\\d]+)\\s*");
+        final Pattern quadeq18 = Pattern.compile("(cot)\\s*([+-]?[\\d]+)\\s*");
+        final Pattern eqn2 = Pattern.compile("(\\d+)\\s*(\\d+)");
+        final Pattern eqn3 = Pattern.compile("(\\d+)\\s(\\d+)\\s(\\d+)");
+        final Pattern eqn4 = Pattern.compile("(\\d+)\\s(\\d+)\\s(\\d+)\\s(\\d+)");
+        final Pattern eqn5 = Pattern.compile("(\\d+)\\s(\\d+)\\s(\\d+)\\s(\\d+)\\s(\\d+)");
+        final Pattern eqn6 = Pattern.compile("(\\d+)\\s(\\d+)\\s(\\d+)\\s(\\d+)\\s(\\d+)\\s(\\d+)");
+        final Pattern eqn7 = Pattern.compile("(\\d+)\\s(\\d+)\\s(\\d+)\\s(\\d+)\\s(\\d+)\\s(\\d+)\\s(\\d+)");
 
 
 
-        Pattern p[]= {quadeq1,quadeq2,quadeq3,quadeq4,quadeq5,quadeq6,quadeq7,quadeq8,quadeq9,quadeq10,quadeq11,quadeq12};
 
 
-        for(int i=0;i<12;i++){
+
+
+        Pattern p[]= {quadeq1,quadeq2,quadeq3,quadeq4,quadeq5,quadeq6,quadeq7,quadeq8,quadeq9,quadeq10,quadeq11,quadeq12,quadeq13,quadeq14,quadeq15,quadeq16,quadeq17,quadeq18,eqn2,eqn3,eqn4,eqn5,eqn6,eqn7};
+
+
+        for(int i=0;i<24;i++){
             matcher=p[i].matcher(str);
             if (matcher.matches()) {
                 return i+1;
